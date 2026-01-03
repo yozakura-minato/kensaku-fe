@@ -1,11 +1,7 @@
 # **KenSaku**
-
 A web application that allows users to create a simple and customizable search page.
 
-
-
-You are now in the **Frontend repository**. Explore more at:
-
+You are now in the **FRONTEND REPOSITORY**. Explore more at:
 * [Backend repository](https://github.com/yozakura-minato/kensaku-be)
 * [Document repository](https://github.com/yozakura-minato/kensaku-docs)
 
@@ -15,7 +11,6 @@ You are now in the **Frontend repository**. Explore more at:
 * Tailwind CSS
 
 ### **Getting Started**
-
 First, run the development server:
 
 ```bash
