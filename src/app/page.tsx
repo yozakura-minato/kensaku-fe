@@ -1,65 +1,106 @@
-import Image from "next/image";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Search, Database, Globe, ArrowRight } from "lucide-react"
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col min-h-screen">
+      <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2 font-bold text-xl tracking-tight">
+            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <Search className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <span>KenSaku</span>
+          </Link>
+          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
+            <Link href="#about-us" className="hover:text-foreground transition-colors">
+              About us
+            </Link>
+            <Link href="#features" className="hover:text-foreground transition-colors">
+              Features
+            </Link>
+            <Link href="#faq" className="hover:text-foreground transition-colors">
+              FAQ
+            </Link>
+          </nav>
+          <div className="flex items-center space-x-4">
+            <Link href="/auth/signin">
+              <Button variant="ghost" size="sm">
+                Sign in
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button size="sm">Sign up</Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section id="#about-us" className="py-24 md:py-32 border-b">
+          <div className="container mx-auto px-4 text-center max-w-4xl">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter mb-6 bg-linear-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">
+              The simple search platform for your data.
+            </h1>
+            <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+              Create custom search pages, import your data, and provide convenient search experiences for everyone.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/auth/signup">
+                <Button size="lg" className="px-8 py-6 text-lg rounded-full">
+                  Start Building <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-full bg-transparent">
+                Start Searching
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature Grid */}
+        <section id="features" className="py-24 bg-card/30">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="p-8 rounded-2xl border bg-card/50 hover:bg-card transition-colors">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary">
+                  <Globe className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Custom Search Pages</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Create and customize search pages with simple, intuitive steps — no coding required.
+                </p>
+              </div>
+              <div className="p-8 rounded-2xl border bg-card/50 hover:bg-card transition-colors">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary">
+                  <Database className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Instant Data Import</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Import data in just a few clicks — upload files or connect sources effortlessly.
+                </p>
+              </div>
+              <div className="p-8 rounded-2xl border bg-card/50 hover:bg-card transition-colors">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary">
+                  <Search className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold mb-3">Convenient Search</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Search information quickly with a simple and user-friendly interface.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <footer className="border-t py-12 bg-background">
+        <div className="container mx-auto px-4 flex justify-center items-center text-sm text-muted-foreground">
+            &copy; 2026 KenSaku Platform. All Rights Reserved.
+        </div>
+      </footer>
     </div>
-  );
+  )
 }
