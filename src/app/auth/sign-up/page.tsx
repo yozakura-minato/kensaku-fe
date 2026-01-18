@@ -9,6 +9,7 @@ import { Search } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import { displayNameValidation, emailValidation, passwordValidation, confirmPasswordValidation } from "./validations"
+import { apiFetch } from "@/lib/api-fetch"
 
 export default function SignUpPage() {
 
@@ -33,7 +34,7 @@ export default function SignUpPage() {
   });
 
   // Submit handler
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const getErrors: FormErrors = {
@@ -46,7 +47,25 @@ export default function SignUpPage() {
     setFormErrors(getErrors);
 
     if (!getErrors.displayNameError && !getErrors.emailError && !getErrors.passwordError && !getErrors.confirmPasswordError) {
-      toast.success("Signed up successfully!");
+      const result = await apiFetch("http://localhost:8080/auth/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          displayName,
+          email,
+          password
+        })
+      });
+      if (result.ok) {
+        toast.success(`${displayName} user signed up successfully!`);
+        return;
+      }
+      if (result.status === 400) {
+        toast.error(result.message);
+        return;
+      }
+      // result.status === 400
+      alert(result.message);
     }
   }
 
