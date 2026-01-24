@@ -10,8 +10,11 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { displayNameValidation, emailValidation, passwordValidation, confirmPasswordValidation } from "./validations"
 import { apiFetch } from "@/lib/api-fetch"
+import { useRouter } from "next/navigation";
+import { ERROR_MESSAGES } from "@/lib/message"
 
 export default function SignUpPage() {
+  const router = useRouter();
 
   /* ====== STATES ====== */
   const [displayName, setDisplayName] = useState<string>("");
@@ -57,15 +60,14 @@ export default function SignUpPage() {
         })
       });
       if (result.ok) {
-        toast.success(`${displayName} user signed up successfully!`);
+        router.push("/");
+        toast.success(ERROR_MESSAGES["SIGN_UP.SUCCESS"]);
         return;
       }
-      if (result.status === 400) {
-        toast.error(result.message);
-        return;
-      }
-      // result.status === 400
-      alert(result.message);
+      
+      // Handle error - result.message is already the i18n key
+      const errorMessage = ERROR_MESSAGES[result.message] || ERROR_MESSAGES["GENERAL.ERROR.UNKNOWN"];
+      toast.error(errorMessage);
     }
   }
 
