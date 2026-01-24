@@ -1,7 +1,9 @@
+import { ERROR_MESSAGES } from "./message";
+
 export type ApiResult<T> =
   | { ok: true; status: 200; data: T }
   | { ok: false; status: 400; message: string; errors?: Record<string, string> }
-  | { ok: false; status: 500; message: string };
+  | { ok: false; status: 401 | 403 | 404 | 500; message: string };
 
 export async function apiFetch<T>(
   url: string,
@@ -15,14 +17,21 @@ export async function apiFetch<T>(
     return {
       ok: false,
       status: 500,
-      message: "Network error",
+      message: ERROR_MESSAGES["GENERAL.ERROR.INTERNAL"],
     };
   }
 
   let body: unknown = null;
 
   try {
-    body = await res.json();
+    const text = await res.text();
+    if (text) {
+      try {
+        body = JSON.parse(text);
+      } catch {
+        body = text;
+      }
+    }
   } catch {
     // no body
   }
@@ -36,24 +45,46 @@ export async function apiFetch<T>(
   }
 
   if (res.status === 400) {
-    const errorBody = body as {
-      message?: string;
-      errors?: Record<string, string>;
-    };
+    const serverMessage = getErrorMessage(body);
+    const errorBody = typeof body === "object" && body !== null 
+      ? (body as { errors?: Record<string, string> })
+      : {};
 
     return {
       ok: false,
       status: 400,
-      message: errorBody?.message ?? "Bad request",
+      message: serverMessage,
       errors: errorBody?.errors,
     };
   }
 
-  const errorBody = body as { message?: string };
+  // Catch all other error statuses
+  const serverMessage = getErrorMessage(body);
+  const statusCode = res.status as 401 | 403 | 404 | 500;
 
   return {
     ok: false,
-    status: 500,
-    message: errorBody?.message ?? "Internal server error",
+    status: statusCode,
+    message: serverMessage || ERROR_MESSAGES["GENERAL.ERROR.UNKNOWN"],
   };
+}
+
+function getErrorMessage(body: unknown): string {
+  // Handle string exception from Spring Boot
+  if (typeof body === "string") {
+    return body;
+  }
+
+  // Handle JSON object with message property
+  if (typeof body === "object" && body !== null) {
+    const obj = body as Record<string, unknown>;
+    if (obj.message && typeof obj.message === "string") {
+      return obj.message;
+    }
+    if (obj.error && typeof obj.error === "string") {
+      return obj.error;
+    }
+  }
+
+  return "";
 }
