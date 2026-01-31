@@ -1,3 +1,10 @@
+/**
+ * (1) Required
+ * 
+ * (2) Length 3~30 and only letters, numbers, spaces
+ * @param displayName string
+ * @returns errorMessage - string
+ */
 export function displayNameValidation(displayName: string): string {
     
     // Required
@@ -14,6 +21,11 @@ export function displayNameValidation(displayName: string): string {
     return "";
 }
 
+/**
+ * Required
+ * @param email string 
+ * @returns errorMessage - string
+ */
 export function emailValidation(email: string): string {
     
     // Required
@@ -24,6 +36,15 @@ export function emailValidation(email: string): string {
     return "";
 }
 
+/**
+ * (1) Required
+ * 
+ * (2) Length 8~50
+ * 
+ * (3) Contain at least 2 types of digit: lowercase letter, uppercase letter, number, special character
+ * @param password string
+ * @returns errorMessage - string
+ */
 export function passwordValidation(password: string): string {
     
     // Required
@@ -50,6 +71,14 @@ export function passwordValidation(password: string): string {
     return "";
 }
 
+/**
+ * (1) Required
+ * 
+ * (2) Match password
+ * @param confirmPassword 
+ * @param password 
+ * @returns 
+ */
 export function confirmPasswordValidation(confirmPassword: string, password: string): string {
     
     // Required

@@ -5,6 +5,14 @@ export type ApiResult<T> =
   | { ok: false; status: 400; message: string; errors?: Record<string, string> }
   | { ok: false; status: 401 | 403 | 404 | 500; message: string };
 
+/**
+ * Fetches data from the API and returns a standardized result object.
+ * Handles various HTTP status codes and parses JSON responses.
+ * @param url The URL to fetch from.
+ * @param options Optional fetch options (method, headers, body, etc.).
+ * @returns A promise that resolves to an ApiResult containing the data on success,
+ * or error information on failure.
+ */
 export async function apiFetch<T>(
   url: string,
   options?: RequestInit
