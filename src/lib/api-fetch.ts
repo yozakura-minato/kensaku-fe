@@ -25,7 +25,7 @@ export async function apiFetch<T>(
     return {
       ok: false,
       status: 500,
-      message: ERROR_MESSAGES["GENERAL.ERROR.INTERNAL"],
+      message: ERROR_MESSAGES["INTERNAL.GENERAL.ERROR"],
     };
   }
 
@@ -73,7 +73,7 @@ export async function apiFetch<T>(
   return {
     ok: false,
     status: statusCode,
-    message: serverMessage || ERROR_MESSAGES["GENERAL.ERROR.UNKNOWN"],
+    message: serverMessage || ERROR_MESSAGES["UNKNOWN.GENERAL.ERROR"],
   };
 }
 
