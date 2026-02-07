@@ -8,9 +8,9 @@ export default function LandingPage() {
     <div className="flex flex-col min-h-screen">
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          
+
           <Logo />
-          
+
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
             <Link href="#about-us" className="hover:text-foreground transition-colors">
               About us
@@ -22,7 +22,7 @@ export default function LandingPage() {
               FAQ
             </Link>
           </nav>
-          
+
           <div className="flex items-center space-x-4">
             <Link href="/auth/sign-in">
               <Button variant="ghost" size="sm">
@@ -52,9 +52,11 @@ export default function LandingPage() {
                   Start Building <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-full bg-transparent">
-                Start Searching
-              </Button>
+              <Link href="/auth/sign-in">
+                <Button size="lg" variant="outline" className="px-8 py-6 text-lg rounded-full bg-transparent">
+                  Start Searching
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -63,7 +65,7 @@ export default function LandingPage() {
         <section id="features" className="py-24 bg-card/30">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              
+
               <div className="p-8 rounded-2xl border bg-card/50 hover:bg-card transition-colors">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6 text-primary">
                   <Globe className="w-6 h-6" />
@@ -95,7 +97,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </section>  
+        </section>
       </main>
 
       <Footer />
