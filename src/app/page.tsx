@@ -1,23 +1,15 @@
-"use client"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Search, Database, Globe, ArrowRight } from "lucide-react"
+import { Logo, Footer } from "@/components/custom/general"
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      
-      {/* Header */}
       <header className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           
-          <Link href="/" className="flex items-center space-x-2 font-bold text-xl tracking-tight">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-              <Search className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span>KenSaku</span>
-          </Link>
+          <Logo />
           
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
             <Link href="#about-us" className="hover:text-foreground transition-colors">
@@ -41,11 +33,10 @@ export default function LandingPage() {
               <Button size="sm">Sign up</Button>
             </Link>
           </div>
-
         </div>
       </header>
-
       <main className="flex-1">
+
         {/* Hero section */}
         <section id="#about-us" className="py-24 md:py-32 border-b">
           <div className="container mx-auto px-4 text-center max-w-4xl">
@@ -102,19 +93,12 @@ export default function LandingPage() {
                   Search information quickly with a simple and user-friendly interface.
                 </p>
               </div>
-              
             </div>
           </div>
-        </section>
+        </section>  
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-12 bg-background">
-        <div className="container mx-auto px-4 flex justify-center items-center text-sm text-muted-foreground">
-            &copy; 2026 KenSaku Platform. All Rights Reserved.
-        </div>
-      </footer>
-   
+      <Footer />
     </div>
   );
 }

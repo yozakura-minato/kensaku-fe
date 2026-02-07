@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Search } from "lucide-react"
 import { useState } from "react"
 import { toast } from "sonner"
 import { displayNameValidation, emailValidation, passwordValidation, confirmPasswordValidation } from "./validations"
 import { apiFetch } from "@/lib/api-fetch"
 import { useRouter } from "next/navigation";
 import { ERROR_MESSAGES } from "@/lib/message"
+import { AuthHeader } from "@/components/custom/auth";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -22,6 +22,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
+  /* ====== HANDLERS ====== */
   type FormErrors = {
     displayNameError: string,
     emailError: string,
@@ -65,8 +66,8 @@ export default function SignUpPage() {
         return;
       }
       
-      // Handle error - result.message is already the i18n key
-      const errorMessage = ERROR_MESSAGES[result.message] || ERROR_MESSAGES["GENERAL.ERROR.UNKNOWN"];
+      // Show message
+      const errorMessage = ERROR_MESSAGES[result.message] || ERROR_MESSAGES["UNKNOWN.GENERAL.ERROR"];
       toast.error(errorMessage);
     }
   }
@@ -76,16 +77,7 @@ export default function SignUpPage() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-background">
       <div className="w-full max-w-md space-y-8">
 
-        {/* Logo */}
-        <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center space-x-2 font-bold text-xl">
-            <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
-              <Search className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span>KenSaku</span>
-          </Link>
-        </div>
-
+        <AuthHeader />
         <Card className="border-border/40">
 
           {/* Form header */}
@@ -93,12 +85,11 @@ export default function SignUpPage() {
             <CardTitle className="text-3xl">Sign up</CardTitle>
             <CardDescription>Enter your details below to create an account</CardDescription>
           </CardHeader>
-
+          
           {/* Form fields */}
           <form onSubmit={handleSubmit}>
-
             <CardContent className="space-y-4">
-
+              
               <div className="space-y-2">
                 <Label htmlFor="display-name">Display Name</Label>
                 <Input id="display-name" placeholder="John Doe"
@@ -138,21 +129,21 @@ export default function SignUpPage() {
                   <p className="text-xs text-red-600">{formErrors.confirmPasswordError}</p>
                 )}
               </div>
-
             </CardContent>
 
             {/* Form actions */}
             <CardFooter className="flex flex-col gap-4 pt-6">
+              
               <Button type="submit" className="w-full">Sign up</Button>
+              
               <div className="text-center text-sm text-muted-foreground">
                 Already have an account?{" "}
-                <Link href="/auth/signin" className="text-foreground hover:underline underline-offset-4">
+                <Link href="/auth/sign-in" className="text-foreground hover:underline underline-offset-4">
                   Sign in
                 </Link>
               </div>
 
             </CardFooter>
-
           </form>
         </Card>
       </div>
