@@ -6,7 +6,7 @@
  * @returns errorMessage - string
  */
 export function displayNameValidation(displayName: string): string {
-    
+
     // Required
     if (!displayName) {
         return "\"Display Name\" is required!.";
@@ -27,7 +27,7 @@ export function displayNameValidation(displayName: string): string {
  * @returns errorMessage - string
  */
 export function emailValidation(email: string): string {
-    
+
     // Required
     if (!email) {
         return "\"Email\" is required.";
@@ -46,7 +46,7 @@ export function emailValidation(email: string): string {
  * @returns errorMessage - string
  */
 export function passwordValidation(password: string): string {
-    
+
     // Required
     if (!password) {
         return "\"Password\" is required.";
@@ -80,7 +80,7 @@ export function passwordValidation(password: string): string {
  * @returns 
  */
 export function confirmPasswordValidation(confirmPassword: string, password: string): string {
-    
+
     // Required
     if (!confirmPassword) {
         return "\"Confirm password\" is required";

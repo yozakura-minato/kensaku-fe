@@ -65,7 +65,7 @@ export default function SignUpPage() {
         toast.success(ERROR_MESSAGES["SIGN_UP.SUCCESS"]);
         return;
       }
-      
+
       // Show message
       const errorMessage = ERROR_MESSAGES[result.message] || ERROR_MESSAGES["UNKNOWN.GENERAL.ERROR"];
       toast.error(errorMessage);
@@ -85,11 +85,11 @@ export default function SignUpPage() {
             <CardTitle className="text-3xl">Sign up</CardTitle>
             <CardDescription>Enter your details below to create an account</CardDescription>
           </CardHeader>
-          
+
           {/* Form fields */}
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
-              
+
               <div className="space-y-2">
                 <Label htmlFor="display-name">Display Name</Label>
                 <Input id="display-name" placeholder="John Doe"
@@ -133,9 +133,9 @@ export default function SignUpPage() {
 
             {/* Form actions */}
             <CardFooter className="flex flex-col gap-4 pt-6">
-              
+
               <Button type="submit" className="w-full">Sign up</Button>
-              
+
               <div className="text-center text-sm text-muted-foreground">
                 Already have an account?{" "}
                 <Link href="/auth/sign-in" className="text-foreground hover:underline underline-offset-4">

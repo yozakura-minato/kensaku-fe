@@ -54,7 +54,7 @@ export async function apiFetch<T>(
 
   if (res.status === 400) {
     const serverMessage = getErrorMessage(body);
-    const errorBody = typeof body === "object" && body !== null 
+    const errorBody = typeof body === "object" && body !== null
       ? (body as { errors?: Record<string, string> })
       : {};
 
