@@ -47,7 +47,7 @@ export default function LandingPage() {
               Create custom search pages, import your data, and provide convenient search experiences for everyone.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/auth/signup">
+              <Link href="/auth/sign-up">
                 <Button size="lg" className="px-8 py-6 text-lg rounded-full">
                   Start Building <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
